@@ -3,11 +3,19 @@
 function formatCurrency(n, c, d, t) {
   "use strict";
 
-  var s, i, j;
+  var s;
+  var i;
+  var j;
 
   c = isNaN(c = Math.abs(c)) ? 2 : c;
-  d = d === undefined ? "." : d;
-  t = t === undefined ? "," : t;
+
+  var d = void 0;
+  var undefined1 = d;
+  d = typeof d === undefined1 ? "," : d;
+
+  var t = void 0;
+  var undefined2 = t;
+  t = typeof t === undefined2 ? "," : t;
 
   s = n < 0 ? "-" : "";
   i = parseInt(n = Math.abs(+n || 0).toFixed(c), 10) + "";
@@ -20,31 +28,32 @@ function formatCurrency(n, c, d, t) {
  * Uses the closure to map JQuery variable to $ variable
  */
 (function ($) {
+  "use strict";
   Drupal.behaviors.thermometer = {
     // Originally from:
     // https://www.sitepoint.com/community/t/code-for-a-fundraising-thermometer/21832/4
     attach: function (context) {
-      $(".thermometer", context).each(function (index, value) {
+      $(".thermometer").each(function (index, value) {
         // Set up our vars and cache some jQuery objects.
-        var $thermo = value,
-          $progress = $(".progress", $thermo),
-          $goal = $(".goal", $thermo);
+        var $thermo = value;
+        var $progress = $(".progress", $thermo);
+        var $goal = $(".goal", $thermo);
 
         // Work out our numbers.
-        var goalAmount = parseFloat($goal.text()),
-          progressAmount = parseFloat($progress.text()),
-          percentageAmount = Math.min(Math.round(progressAmount / goalAmount * 1000) / 10, 100), //make sure we have 1 decimal point
-          symbol = $(".track", $thermo).attr("data-symbol_prefix");
+        var goalAmount = parseFloat($goal.text());
+        var progressAmount = parseFloat($progress.text());
+        var percentageAmount =  Math.min(Math.round(progressAmount / goalAmount * 1000) / 10, 100); // make sure we have 1 decimal point
+        var symbol = $(".track", $thermo).attr("data-symbol_prefix");
 
         // Let's format the numbers and put them back in the DOM
-        $goal.find(".amount").text(symbol + formatCurrency(goalAmount));
-        $progress.find(".amount").text(symbol + formatCurrency(progressAmount));
+        $goal.find(".amount").text("$" + formatCurrency(goalAmount));
+        $progress.find(".amount").text("$" + formatCurrency(progressAmount));
 
         // Let's set the progress indicator.
         $progress.find(".amount").hide();
         $progress.animate({
           "height": percentageAmount + "%"
-        }, 1200, function(){
+        }, 1200, function () {
           $(this).find(".amount").fadeIn(500);
         });
       });
