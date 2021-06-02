@@ -1,0 +1,97 @@
+# Default settings are not located here. Theme settings in general are handled
+# strictly by this base theme via the @BootstrapSetting annotation discovery
+# process. This is to help sub-theme's inherit its settings properly and
+# determine when a setting should be saved to config as "overridden".
+#
+# @see \Drupal\bootstrap\Plugin\SettingBase
+# @see \Drupal\bootstrap\Plugin\SettingInterface
+# @see \Drupal\bootstrap\Plugin\SettingManager
+# @see \Drupal\bootstrap\Plugin\Form\SystemThemeSettings
+
+# Default features.
+features:
+   favicon: true
+   logo: true
+   name: true
+   node_user_picture: true
+   slogan: true
+header_contact: '020-060-0260'
+header_email:   'info@company.com'
+
+first_banner_heading: 'Title Heading'
+first_banner_description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+first_banner_button_one_link_title: 'Button Title One'
+first_banner_button_two_link_title: 'Button Title Two'
+second_banner_heading_one: 'Title Heading One'
+second_banner_description_one: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+second_banner_heading_two: 'Title Heading Two'
+second_banner_description_two: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+third_banner_heading: 'Title Heading Three'
+third_banner_description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+third_banner_button_link_title: 'Button Title Three'
+
+welcome_heading_one: 'Welcome To'
+welcome_heading_two: 'Photogenic Design'
+welcome_description: 'Lorem ipsum dolor sit amet, consect adipiscing elit. Etiam metus libero mauriec ignissim fermentum.'
+
+service_heading: 'OUR SERVICE'
+service_one_heading: 'Service Title One'
+service_one_description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+service_one_button_link_title: 'Button Title One'
+service_two_heading: 'Service Title Two'
+service_two_description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+service_two_button_link_title: 'Button Title Two'
+service_three_heading: 'Service Title Three'
+service_three_description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+service_three_button_link_title: 'Button Title Three' 
+
+team_heading: 'MEET OUR TEAM'
+team_name_one: 'Team Name One'
+team_profession_one: 'Team Profession One'
+team_name_two: 'Team Name Two'
+team_profession_two: 'Team Profession Two'
+team_name_three: 'Team Name Three'
+team_profession_three: 'Team Profession Three'
+team_name_four: 'Team Name Four'
+team_profession_four: 'Team Profession Four'
+
+portfolio_heading: 'OUR PORTFOLIO'
+portfolio_menu_one: 'All Portfolio'
+portfolio_menu_two: 'Portfolio One'
+portfolio_menu_three: 'Portfolio Two'
+portfolio_menu_four: 'Portfolio Three'
+portfolio_menu_five: 'Portfolio Four'
+portfolio_one_overlay_heading_one: 'Portfolio Two'
+portfolio_one_overlay_heading_two: 'Image Title'
+portfolio_two_overlay_heading_one: 'Portfolio Four'
+portfolio_two_overlay_heading_two: 'Image Title'
+portfolio_three_overlay_heading_one: 'Portfolio Three'
+portfolio_three_overlay_heading_two: 'Image Title'
+portfolio_four_overlay_heading_one: 'Portfolio One'
+portfolio_four_overlay_heading_two: 'Image Title'
+portfolio_five_overlay_heading_one: 'Portfolio Three'
+portfolio_five_overlay_heading_two: 'Image Title'
+portfolio_six_overlay_heading_one: 'Portfolio Three'
+portfolio_six_overlay_heading_two: 'Image Title'
+portfolio_seven_overlay_heading_one: 'Portfolio One'
+portfolio_seven_overlay_heading_two: 'Image Title'
+portfolio_eight_overlay_heading_one: 'Portfolio Four'
+portfolio_eight_overlay_heading_two: 'Image Title'
+portfolio_nine_overlay_heading_one: 'Portfolio Two'
+portfolio_nine_overlay_heading_two: 'Image Title'
+portfolio_ten_overlay_heading_one: 'Portfolio Three'
+portfolio_ten_overlay_heading_two: 'Image Title'
+portfolio_button_link_title: 'Button Title'
+
+contact_heading: 'CONTACT US'
+contact_description: 'Lorem ipsum dolor sit amet, consectetu adipiscing elit pendisse as a molesti.'
+contact_address: 'Lorem ipsum dolor sit amet, consectetu adipiscing elit pendisse as a molesti.'
+contact_phone_number: '090-080-0110'
+contact_button_title: 'Button Title'
+
+tweet_message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit suspendiise as a molesti neque vestibulum,  persiutsor de andues mare fricilus ipsum dolor sit amet cons forukus.'
+tweet_user: 'Lorem ipsum dolor amet'
+
+footer_facebook: 'https://www.facebook.com/'
+footer_twitter: 'https://www.twitter.com/'
+footer_linkedin: 'http://www.linkedin.com/'

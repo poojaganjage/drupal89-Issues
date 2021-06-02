@@ -1,0 +1,1516 @@
+<?php
+
+/**
+ * @file
+ * Implementation of hook_form_system_theme_settings_alter()
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
+
+/**
+ * Theme settings alter for photogenic theme form.
+ */
+function photogenic_form_system_theme_settings_alter(&$form, FormStateInterface &$form_state, $form_id = NULL) {
+
+  $form['theme_settings']['theme'] = [
+    '#type' => 'details',
+    '#title' => t('Photogenic Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#weight' => 1,
+  ];
+
+  // Header Settings
+  $form['theme_settings']['theme']['header'] = [
+    '#type' => 'details',
+    '#title' => t('Header Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['header']['header_contact_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('header_contact_image'),
+  ];
+
+  $form['theme_settings']['theme']['header']['header_contact'] = [
+    '#type' => 'tel',
+    '#title' => t('Contact Number'),
+    '#default_value' => theme_get_setting('header_contact'),
+    '#description' => t('Enter header contact number.'),
+  ];
+
+  $form['theme_settings']['theme']['header']['header_email_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('header_email_image'),
+  ];
+
+  $form['theme_settings']['theme']['header']['header_email'] = [
+    '#type' => 'textfield',
+    '#title' => t('Email ID'),
+    '#default_value' => theme_get_setting('header_email'),
+    '#description' => t('Enter header email id.'),
+  ];
+
+  $form['theme_settings']['theme']['banner'] = [
+    '#type' => 'details', 
+    '#title' => t('Banner Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  // Banner Settings
+  $form['theme_settings']['theme']['banner']['banner_one'] = [
+    '#type' => 'details', 
+    '#title' => t('Banner One Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_one']['first_banner_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Heading'),
+    '#default_value' => theme_get_setting('first_banner_heading'),
+    '#description' => t('Enter banner heading.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_one']['first_banner_description'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Description'),
+    '#default_value' => theme_get_setting('first_banner_description'),
+    '#description' => t('Enter banner description.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_one']['first_banner_button_one_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Button One Link Url'),
+    '#default_value' => theme_get_setting('first_banner_button_one_link_url'),
+    '#description' => t('Enter banner button one link url.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_one']['first_banner_button_one_link_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Button One Link Title'),
+    '#default_value' => theme_get_setting('first_banner_button_one_link_title'),
+    '#description' => t('Enter banner button one link title.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_one']['first_banner_button_two_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Button Two Link Url'),
+    '#default_value' => theme_get_setting('first_banner_button_two_link_url'),
+    '#description' => t('Enter banner button two link url.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_one']['first_banner_button_two_link_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Button Two Link Title'),
+    '#default_value' => theme_get_setting('first_banner_button_two_link_title'),
+    '#description' => t('Enter banner button two link title.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_two'] = [
+    '#type' => 'details', 
+    '#title' => t('Banner Two Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_two']['second_banner_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Heading One'),
+    '#default_value' => theme_get_setting('second_banner_heading_one'),
+    '#description' => t('Enter banner heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_two']['second_banner_description_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Description One'),
+    '#default_value' => theme_get_setting('second_banner_description_one'),
+    '#description' => t('Enter banner description one.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_two']['second_banner_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Heading Two'),
+    '#default_value' => theme_get_setting('second_banner_heading_two'),
+    '#description' => t('Enter banner heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_two']['second_banner_description_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Description Two'),
+    '#default_value' => theme_get_setting('second_banner_description_two'),
+    '#description' => t('Enter banner description two.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_third'] = [
+    '#type' => 'details', 
+    '#title' => t('Banner Third Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_third']['third_banner_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Heading'),
+    '#default_value' => theme_get_setting('third_banner_heading'),
+    '#description' => t('Enter banner heading.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_third']['third_banner_description'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Description'),
+    '#default_value' => theme_get_setting('third_banner_description'),
+    '#description' => t('Enter banner description.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_third']['third_banner_button_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Button Link Url'),
+    '#default_value' => theme_get_setting('third_banner_button_link_url'),
+    '#description' => t('Enter banner button link url.'),
+  ];
+
+  $form['theme_settings']['theme']['banner']['banner_third']['third_banner_button_link_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Banner Button Link Title'),
+    '#default_value' => theme_get_setting('third_banner_button_link_title'),
+    '#description' => t('Enter banner button link title.'),
+  ];
+
+  // Welcome Settings
+  $form['theme_settings']['theme']['welcome'] = [
+    '#type' => 'details',
+    '#title' => t('Welcome Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['welcome']['welcome_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Welcome Heading One'),
+    '#default_value' => theme_get_setting('welcome_heading_one'),
+    '#description' => t('Enter welcome heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['welcome']['welcome_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Welcome Heading Two'),
+    '#default_value' => theme_get_setting('welcome_heading_two'),
+    '#description' => t('Enter welcome heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['welcome']['welcome_description'] = [
+    '#type' => 'textfield',
+    '#title' => t('Welcome Description'),
+    '#default_value' => theme_get_setting('welcome_description'),
+    '#description' => t('Enter welcome description.'),
+  ];
+   
+  // Service Settings
+  $form['theme_settings']['theme']['service'] = [
+    '#type' => 'details',
+    '#title' => t('Service Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['service']['service_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Heading'),
+    '#default_value' => theme_get_setting('service_heading'),
+    '#description' => t('Enter service heading.'),
+  ];
+   
+  $form['theme_settings']['theme']['service']['service_one'] = [
+    '#type' => 'details',
+    '#title' => t('Service One Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['service']['service_one']['service_one_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('service_one_image'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_one']['service_one_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Heading'),
+    '#default_value' => theme_get_setting('service_one_heading'),
+    '#description' => t('Enter service heading.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_one']['service_one_description'] = [
+    '#type' => 'textarea',
+    '#title' => t('Service Description'),
+    '#default_value' => theme_get_setting('service_one_description'),
+    '#description' => t('Enter service description.'),
+  ];
+  
+  $form['theme_settings']['theme']['service']['service_one']['service_one_button_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Button Link Url'),
+    '#default_value' => theme_get_setting('service_one_button_link_url'),
+    '#description' => t('Enter service button link url.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_one']['service_one_button_link_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Button Link Title'),
+    '#default_value' => theme_get_setting('service_one_button_link_title'),
+    '#description' => t('Enter service button link title.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_two'] = [
+    '#type' => 'details',
+    '#title' => t('Service Two Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['service']['service_two']['service_two_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('service_two_image'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_two']['service_two_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Heading'),
+    '#default_value' => theme_get_setting('service_two_heading'),
+    '#description' => t('Enter service heading.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_two']['service_two_description'] = [
+    '#type' => 'textarea',
+    '#title' => t('Service Description'),
+    '#default_value' => theme_get_setting('service_two_description'),
+    '#description' => t('Enter service description.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_two']['service_two_button_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Button Link Url'),
+    '#default_value' => theme_get_setting('service_two_button_link_url'),
+    '#description' => t('Enter service button link url.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_two']['service_two_button_link_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Button Link Title'),
+    '#default_value' => theme_get_setting('service_two_button_link_title'),
+    '#description' => t('Enter service button link title.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_three'] = [
+    '#type' => 'details',
+    '#title' => t('Service Three Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['service']['service_three']['service_three_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('service_three_image'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_three']['service_three_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Heading'),
+    '#default_value' => theme_get_setting('service_three_heading'),
+    '#description' => t('Enter service heading.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_three']['service_three_description'] = [
+    '#type' => 'textarea',
+    '#title' => t('Service Description'),
+    '#default_value' => theme_get_setting('service_three_description'),
+    '#description' => t('Enter service description.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_three']['service_three_button_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Button Link Url'),
+    '#default_value' => theme_get_setting('service_three_button_link_url'),
+    '#description' => t('Enter service button link url.'),
+  ];
+
+  $form['theme_settings']['theme']['service']['service_three']['service_three_button_link_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Service Button Link Title'),
+    '#default_value' => theme_get_setting('service_three_button_link_title'),
+    '#description' => t('Enter service button link title.'),
+  ];
+
+  // Team Settings
+  $form['theme_settings']['theme']['team'] = [
+    '#type' => 'details',
+    '#title' => t('Team Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['team']['team_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Team Heading'),
+    '#default_value' => theme_get_setting('team_heading'),
+    '#description' => t('Enter team heading.'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_one'] = [
+    '#type' => 'details',
+    '#title' => t('Team One Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['team']['team_one']['team_one_person_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('team_one_person_image'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_one']['team_one_person_name'] = [
+    '#type' => 'textfield',
+    '#title' => t('Team Person Name'),
+    '#default_value' => theme_get_setting('team_one_person_name'),
+    '#description' => t('Enter team person name.'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_one']['team_one_person_profession'] = [
+    '#type' => 'textfield',
+    '#title' => t('Team Person Profession'),
+    '#default_value' => theme_get_setting('team_one_person_profession'),
+    '#description' => t('Enter team person profession.'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_two'] = [
+    '#type' => 'details',
+    '#title' => t('Team Two Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['team']['team_two']['team_two_person_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('team_two_person_image'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_two']['team_two_person_name'] = [
+    '#type' => 'textfield',
+    '#title' => t('Team Person Name'),
+    '#default_value' => theme_get_setting('team_two_person_name'),
+    '#description' => t('Enter team person name.'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_two']['team_two_person_profession'] = [
+    '#type' => 'textfield',
+    '#title' => t('Team Person Profession'),
+    '#default_value' => theme_get_setting('team_two_person_profession'),
+    '#description' => t('Enter team person profession.'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_three'] = [
+    '#type' => 'details',
+    '#title' => t('Team Three Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['team']['team_three']['team_three_person_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('team_three_person_image'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_three']['team_three_person_name'] = [
+    '#type' => 'textfield',
+    '#title' => t('Team Person Name'),
+    '#default_value' => theme_get_setting('team_three_person_name'),
+    '#description' => t('Enter team person name.'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_three']['team_three_person_profession'] = [
+    '#type' => 'textfield',
+    '#title' => t('Team Person Profession'),
+    '#default_value' => theme_get_setting('team_three_person_profession'),
+    '#description' => t('Enter team person profession.'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_four'] = [
+    '#type' => 'details',
+    '#title' => t('Team Four Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['team']['team_four']['team_four_person_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('team_four_person_image'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_four']['team_four_person_name'] = [
+    '#type' => 'textfield',
+    '#title' => t('Team Person Name'),
+    '#default_value' => theme_get_setting('team_four_person_name'),
+    '#description' => t('Enter team person name.'),
+  ];
+
+  $form['theme_settings']['theme']['team']['team_four']['team_four_person_profession'] = [
+    '#type' => 'textfield',
+    '#title' => t('Team Person Profession'),
+    '#default_value' => theme_get_setting('team_four_person_profession'),
+    '#description' => t('Enter team person profession.'),
+  ];
+
+  // Portfolio Settings
+  $form['theme_settings']['theme']['portfolio'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Heading'),
+    '#default_value' => theme_get_setting('portfolio_heading'),
+    '#description' => t('Enter portfolio heading.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_menu_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Menu One'),
+    '#default_value' => theme_get_setting('portfolio_menu_one'),
+    '#description' => t('Enter portfolio menu one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_menu_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Menu Two'),
+    '#default_value' => theme_get_setting('portfolio_menu_two'),
+    '#description' => t('Enter portfolio menu two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_menu_three'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Menu Three'),
+    '#default_value' => theme_get_setting('portfolio_menu_three'),
+    '#description' => t('Enter portfolio menu three.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_menu_four'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Menu Four'),
+    '#default_value' => theme_get_setting('portfolio_menu_four'),
+    '#description' => t('Enter portfolio menu four.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_menu_five'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Menu Five'),
+    '#default_value' => theme_get_setting('portfolio_menu_five'),
+    '#description' => t('Enter portfolio menu five.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_one'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio One Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_one']['portfolio_one_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_one_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_one']['portfolio_one_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_one_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_one']['portfolio_one_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_one_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_one']['portfolio_one_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_one_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_two'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Two Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_two']['portfolio_two_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_two_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_two']['portfolio_two_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_two_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_two']['portfolio_two_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_two_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_two']['portfolio_two_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_two_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_three'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Three Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_three']['portfolio_three_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_three_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_three']['portfolio_three_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_three_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_three']['portfolio_three_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_three_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_three']['portfolio_three_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_three_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_four'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Four Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_four']['portfolio_four_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_four_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_four']['portfolio_four_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_four_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_four']['portfolio_four_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_four_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_four']['portfolio_four_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_four_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_five'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Five Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_five']['portfolio_five_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_five_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_five']['portfolio_five_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_five_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_five']['portfolio_five_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_five_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_five']['portfolio_five_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_five_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_six'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Six Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_six']['portfolio_six_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_six_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_six']['portfolio_six_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_six_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_six']['portfolio_six_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_six_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_six']['portfolio_six_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_six_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_seven'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Seven Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_seven']['portfolio_seven_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_seven_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_seven']['portfolio_seven_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_seven_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_seven']['portfolio_seven_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_seven_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_seven']['portfolio_seven_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_seven_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_eight'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Eight Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_eight']['portfolio_eight_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_eight_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_eight']['portfolio_eight_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_eight_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_eight']['portfolio_eight_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_eight_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_eight']['portfolio_eight_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_eight_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_nine'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Nine Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_nine']['portfolio_nine_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_nine_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_nine']['portfolio_nine_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_nine_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_nine']['portfolio_nine_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_nine_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_nine']['portfolio_nine_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_nine_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_ten'] = [
+    '#type' => 'details',
+    '#title' => t('Portfolio Ten Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_ten']['portfolio_ten_full_image_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Full Image Link Url'),
+    '#default_value' => theme_get_setting('portfolio_ten_full_image_link_url'),
+    '#description' => t('Enter portfolio full image link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_ten']['portfolio_ten_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('portfolio_ten_image'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_ten']['portfolio_ten_overlay_heading_one'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading One'),
+    '#default_value' => theme_get_setting('portfolio_ten_overlay_heading_one'),
+    '#description' => t('Enter portfolio overlay heading one.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_ten']['portfolio_ten_overlay_heading_two'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Overlay Heading Two'),
+    '#default_value' => theme_get_setting('portfolio_ten_overlay_heading_two'),
+    '#description' => t('Enter portfolio overlay heading two.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_button_link_url'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Button Link Url'),
+    '#default_value' => theme_get_setting('portfolio_button_link_url'),
+    '#description' => t('Enter portfolio button link url.'),
+  ];
+
+  $form['theme_settings']['theme']['portfolio']['portfolio_button_link_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Portfolio Button Link Title'),
+    '#default_value' => theme_get_setting('portfolio_button_link_title'),
+    '#description' => t('Enter portfolio button link title.'),
+  ];
+
+  // Contact Settings
+  $form['theme_settings']['theme']['contact'] = [
+    '#type' => 'details',
+    '#title' => t('Contact Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['contact']['contact_heading'] = [
+    '#type' => 'textfield',
+    '#title' => t('Contact Heading'),
+    '#default_value' => theme_get_setting('contact_heading'),
+    '#description' => t('Enter contact heading.'),
+  ];
+
+  $form['theme_settings']['theme']['contact']['contact_description'] = [
+    '#type' => 'textfield',
+    '#title' => t('Contact Description'),
+    '#default_value' => theme_get_setting('contact_description'),
+    '#description' => t('Enter contact description.'),
+  ];
+
+  $form['theme_settings']['theme']['contact']['contact_address_icon'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('contact_address_icon'),
+  ];
+
+  $form['theme_settings']['theme']['contact']['contact_address'] = [
+    '#type' => 'textfield',
+    '#title' => t('Contact Address'),
+    '#default_value' => theme_get_setting('contact_address'),
+    '#description' => t('Enter contact address.'),
+  ];
+
+  $form['theme_settings']['theme']['contact']['contact_phone_icon'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('contact_phone_icon'),
+  ];
+
+  $form['theme_settings']['theme']['contact']['contact_phone_number'] = [
+    '#type' => 'textfield',
+    '#title' => t('Contact Phone Number'),
+    '#default_value' => theme_get_setting('contact_phone_number'),
+    '#description' => t('Enter contact phone number.'),
+  ];
+
+  $form['theme_settings']['theme']['contact']['contact_button_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Contact Button Title'),
+    '#default_value' => theme_get_setting('contact_button_title'),
+    '#description' => t('Enter contact button title.'),
+  ];
+
+  // Feature Settings
+  $form['theme_settings']['theme']['feature'] = [
+    '#type' => 'details',
+    '#title' => t('Feature Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['feature']['tweet_image'] = [
+    '#type' => 'managed_file',
+    '#title' => 'Upload Image',
+    '#upload_location' => 'public://',
+    '#upload_validators' => [
+      'file_validate_extensions' => ['png gif jpg jpeg'],
+      'file_validate_size' => [5242880],
+    ],
+    '#progress_indicator' => 'bar',
+    '#default_value' => theme_get_setting('tweet_image'),
+  ];
+
+  $form['theme_settings']['theme']['feature']['tweet_message'] = [
+    '#type' => 'textarea',
+    '#title' => t('Tweet Message'),
+    '#default_value' => theme_get_setting('tweet_message'),
+    '#description' => t('Enter tweet message.'),
+  ];
+
+  $form['theme_settings']['theme']['feature']['tweet_user'] = [
+    '#type' => 'textfield',
+    '#title' => t('Tweet User'),
+    '#default_value' => theme_get_setting('tweet_user'),
+    '#description' => t('Enter tweet user.'),
+  ];
+
+  // Social icons Settings
+  $form['theme_settings']['theme']['social_icons'] = [
+    '#type' => 'details',
+    '#title' => t('Social Icons Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+
+  $form['theme_settings']['theme']['social_icons']['footer_facebook'] = [
+    '#type' => 'textfield',
+    '#title' => t('Facebook URL'),
+    '#default_value' => theme_get_setting('footer_facebook'),
+    '#description' => t('Enter facebook url'),
+  ];
+
+  $form['theme_settings']['theme']['social_icons']['footer_twitter'] = [
+    '#type' => 'textfield',
+    '#title' => t('Twitter URL'),
+    '#default_value' => theme_get_setting('footer_twitter'),
+    '#description' => t('Enter twitter url.'),
+  ];
+
+  $form['theme_settings']['theme']['social_icons']['footer_linkedin'] = [
+    '#type' => 'textfield',
+    '#title' => t('Linkedin URL'),
+    '#default_value' => theme_get_setting('footer_linkedin'),
+    '#description' => t('Enter linkedin url.'),
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for Page templates.
+ *
+ * Override or insert variables into the page template.
+ */
+function photogenic_preprocess_page(&$variables) {
+  
+  $variables['base_url'] = $GLOBALS['base_url'];
+  $variables['site_name'] = \Drupal::config('system.site')->get('name');
+
+  //Header Settings
+  $fid = theme_get_setting("header_contact_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['header_contact_image'] = file_create_url($uri);
+    }
+  }
+  $variables['header_contact'] = theme_get_setting('header_contact');
+  
+  $fid = theme_get_setting("header_email_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['header_email_image'] = file_create_url($uri);
+    }
+  }
+  $variables['header_email'] = theme_get_setting('header_email');
+
+  //Banner Settings
+  $variables['first_banner_heading'] = theme_get_setting('first_banner_heading');
+  $variables['first_banner_description'] = theme_get_setting('first_banner_description');
+  $variables['first_banner_button_one_link_url'] = theme_get_setting('first_banner_button_one_link_url');
+  $variables['first_banner_button_one_link_title'] = theme_get_setting('first_banner_button_one_link_title');
+  $variables['first_banner_button_two_link_url'] = theme_get_setting('first_banner_button_two_link_url');
+  $variables['first_banner_button_two_link_title'] = theme_get_setting('first_banner_button_two_link_title');
+  $variables['second_banner_heading_one'] = theme_get_setting('second_banner_heading_one');
+  $variables['second_banner_description_one'] = theme_get_setting('second_banner_description_one');
+  $variables['second_banner_heading_two'] = theme_get_setting('second_banner_heading_two');
+  $variables['second_banner_description_two'] = theme_get_setting('second_banner_description_two');
+  $variables['third_banner_heading'] = theme_get_setting('third_banner_heading');
+  $variables['third_banner_description'] = theme_get_setting('third_banner_description');
+  $variables['third_banner_button_link_url'] = theme_get_setting('third_banner_button_link_url');
+  $variables['third_banner_button_link_title'] = theme_get_setting('third_banner_button_link_title');
+
+  // Welcome Settings
+  $variables['welcome_heading_one'] = theme_get_setting('welcome_heading_one');
+  $variables['welcome_heading_two'] = theme_get_setting('welcome_heading_two');
+  $variables['welcome_description'] = theme_get_setting('welcome_description');
+
+  // Service Settings
+  $variables['service_heading'] = theme_get_setting('service_heading');
+  
+  // Service Settings One
+  $fid = theme_get_setting("service_one_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['service_one_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['service_one_image'] = drupal_get_path('theme', 'photogenic') . '/images/leaf.png';
+  }
+
+  $variables['service_one_heading'] = theme_get_setting('service_one_heading');
+  $description1 = theme_get_setting('service_one_description');
+  // Strip tags to avoid breaking any html.
+  $string = strip_tags($description1);
+  if (strlen($string) > 250) {
+    $description1 = substr($string, 0, 250);
+    $variables['service_one_sort_description'] = $description1 . '...';
+    $variables['service_one_button_link_url'] = theme_get_setting('service_one_button_link_url');
+  }
+  else {
+    $variables['service_one_description'] = theme_get_setting('service_one_description');
+  }
+  $variables['service_one_button_link_title'] = theme_get_setting('service_one_button_link_title');
+
+  // Service Settings Two.
+  $fid = theme_get_setting("service_two_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['service_two_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['service_two_image'] = drupal_get_path('theme', 'photogenic') . '/images/mobile.png';
+  }
+  
+  $variables['service_two_heading'] = theme_get_setting('service_two_heading');
+  $description2 = theme_get_setting('service_two_description');
+  // Strip tags to avoid breaking any html.
+  $string = strip_tags($description2);
+  if (strlen($string) > 250) {
+    $description2 = substr($string, 0, 250);
+    $variables['service_two_sort_description'] = $description2 . '...';
+    $variables['service_two_button_link_url'] = theme_get_setting('service_two_button_link_url');
+  }
+  else {
+    $variables['service_two_description'] = theme_get_setting('service_two_description');
+  }
+  $variables['service_two_button_link_title'] = theme_get_setting('service_two_button_link_title');
+
+  // Service Settings Three.
+  $fid = theme_get_setting("service_three_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['service_three_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['service_three_image'] = drupal_get_path('theme', 'photogenic') . '/images/battery.png';
+  } 
+  $variables['service_three_heading'] = theme_get_setting('service_three_heading');
+  $description3 = theme_get_setting('service_three_description');
+  // Strip tags to avoid breaking any html.
+  $string = strip_tags($description3);
+  if (strlen($string) > 250) {
+    $description3 = substr($string, 0, 250);
+    $variables['service_three_sort_description'] = $description3 . '...';
+    $variables['service_three_button_link_url'] = theme_get_setting('service_three_button_link_url');
+  }
+  else {
+    $variables['service_three_description'] = theme_get_setting('service_three_description');
+  }
+  $variables['service_three_button_link_title'] = theme_get_setting('service_three_button_link_title');
+
+  // Team Settings One
+  $variables['team_heading'] = theme_get_setting('team_heading');
+  $fid = theme_get_setting("team_one_person_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['team_one_person_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['team_one_person_image'] = drupal_get_path('theme', 'photogenic') . '/images/member1.jpg';
+  }
+  $variables['team_one_person_name'] = theme_get_setting('team_one_person_name');
+  $variables['team_one_person_profession'] = theme_get_setting('team_one_person_profession');
+
+  // Team Settings Two
+  $fid = theme_get_setting("team_two_person_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['team_two_person_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['team_two_person_image'] = drupal_get_path('theme', 'photogenic') . '/images/member2.jpg';
+  }
+  $variables['team_two_person_name'] = theme_get_setting('team_two_person_name');
+  $variables['team_two_person_profession'] = theme_get_setting('team_two_person_profession');
+
+  // Team Settings Three
+  $fid = theme_get_setting("team_three_person_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['team_three_person_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['team_three_person_image'] = drupal_get_path('theme', 'photogenic') . '/images/member3.jpg';
+  }
+  $variables['team_three_person_name'] = theme_get_setting('team_three_person_name');
+  $variables['team_three_person_profession'] = theme_get_setting('team_three_person_profession');
+
+  // Team Settings Four
+  $fid = theme_get_setting("team_four_person_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['team_four_person_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['team_four_person_image'] = drupal_get_path('theme', 'photogenic') . '/images/member4.jpg';
+  }
+  $variables['team_four_person_name'] = theme_get_setting('team_four_person_name');
+  $variables['team_four_person_profession'] = theme_get_setting('team_four_person_profession');
+
+  // Portfolio
+  $variables['portfolio_heading'] = theme_get_setting('portfolio_heading');
+  $variables['portfolio_menu_one'] = theme_get_setting('portfolio_menu_one');
+  $variables['portfolio_menu_two'] = theme_get_setting('portfolio_menu_two');
+  $variables['portfolio_menu_three'] = theme_get_setting('portfolio_menu_three');
+  $variables['portfolio_menu_four'] = theme_get_setting('portfolio_menu_four');
+  $variables['portfolio_menu_five'] = theme_get_setting('portfolio_menu_five');
+
+  // Portfolio One
+  $variables['portfolio_one_full_image_link_url'] = theme_get_setting('portfolio_one_full_image_link_url');
+  $fid = theme_get_setting("portfolio_one_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_one_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_one_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-1.jpg';
+  }
+  $variables['portfolio_one_overlay_heading_one'] = theme_get_setting('portfolio_one_overlay_heading_one');
+  $variables['portfolio_one_overlay_heading_two'] = theme_get_setting('portfolio_one_overlay_heading_two');
+
+  // Portfolio Two
+  $variables['portfolio_two_full_image_link_url'] = theme_get_setting('portfolio_two_full_image_link_url');
+  $fid = theme_get_setting("portfolio_two_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_two_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_two_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-2.jpg';
+  }
+  $variables['portfolio_two_overlay_heading_one'] = theme_get_setting('portfolio_two_overlay_heading_one');
+  $variables['portfolio_two_overlay_heading_two'] = theme_get_setting('portfolio_two_overlay_heading_two');
+
+  // Portfolio Three
+  $variables['portfolio_three_full_image_link_url'] = theme_get_setting('portfolio_three_full_image_link_url');
+  $fid = theme_get_setting("portfolio_three_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_three_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_three_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-3.jpg';
+  }
+  $variables['portfolio_three_overlay_heading_one'] = theme_get_setting('portfolio_three_overlay_heading_one');
+  $variables['portfolio_three_overlay_heading_two'] = theme_get_setting('portfolio_three_overlay_heading_two');
+
+  // Portfolio Four
+  $variables['portfolio_four_full_image_link_url'] = theme_get_setting('portfolio_four_full_image_link_url');
+  $fid = theme_get_setting("portfolio_four_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_four_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_four_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-4.jpg';
+  }
+  $variables['portfolio_four_overlay_heading_one'] = theme_get_setting('portfolio_four_overlay_heading_one');
+  $variables['portfolio_four_overlay_heading_two'] = theme_get_setting('portfolio_four_overlay_heading_two');
+
+  // Portfolio Five
+  $variables['portfolio_five_full_image_link_url'] = theme_get_setting('portfolio_five_full_image_link_url');
+  $fid = theme_get_setting("portfolio_five_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_five_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_five_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-5.jpg';
+  }
+  $variables['portfolio_five_overlay_heading_one'] = theme_get_setting('portfolio_five_overlay_heading_one');
+  $variables['portfolio_five_overlay_heading_two'] = theme_get_setting('portfolio_five_overlay_heading_two');
+
+  // Portfolio Six
+  $variables['portfolio_six_full_image_link_url'] = theme_get_setting('portfolio_six_full_image_link_url');
+  $fid = theme_get_setting("portfolio_six_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_six_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_six_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-6.jpg';
+  }
+  $variables['portfolio_six_overlay_heading_one'] = theme_get_setting('portfolio_six_overlay_heading_one');
+  $variables['portfolio_six_overlay_heading_two'] = theme_get_setting('portfolio_six_overlay_heading_two');
+
+  // Portfolio Seven
+  $variables['portfolio_seven_full_image_link_url'] = theme_get_setting('portfolio_seven_full_image_link_url');
+  $fid = theme_get_setting("portfolio_seven_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_seven_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_seven_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-7.jpg';
+  }
+  $variables['portfolio_seven_overlay_heading_one'] = theme_get_setting('portfolio_seven_overlay_heading_one');
+  $variables['portfolio_seven_overlay_heading_two'] = theme_get_setting('portfolio_seven_overlay_heading_two');
+
+  // Portfolio Eight
+  $variables['portfolio_eight_full_image_link_url'] = theme_get_setting('portfolio_eight_full_image_link_url');
+  $fid = theme_get_setting("portfolio_eight_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_eight_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_eight_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-8.jpg';
+  }
+  $variables['portfolio_eight_overlay_heading_one'] = theme_get_setting('portfolio_eight_overlay_heading_one');
+  $variables['portfolio_eight_overlay_heading_two'] = theme_get_setting('portfolio_eight_overlay_heading_two');
+
+  // Portfolio Nine
+  $variables['portfolio_nine_full_image_link_url'] = theme_get_setting('portfolio_nine_full_image_link_url');
+  $fid = theme_get_setting("portfolio_nine_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_nine_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_nine_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-9.jpg';
+  }
+  $variables['portfolio_nine_overlay_heading_one'] = theme_get_setting('portfolio_nine_overlay_heading_one');
+  $variables['portfolio_nine_overlay_heading_two'] = theme_get_setting('portfolio_nine_overlay_heading_two');
+
+  // Portfolio Ten
+  $variables['portfolio_ten_full_image_link_url'] = theme_get_setting('portfolio_ten_full_image_link_url');
+  $fid = theme_get_setting("portfolio_ten_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['portfolio_ten_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['portfolio_ten_image'] = drupal_get_path('theme', 'photogenic') . '/images/gallery-image-10.jpg';
+  }
+  $variables['portfolio_ten_overlay_heading_one'] = theme_get_setting('portfolio_ten_overlay_heading_one');
+  $variables['portfolio_ten_overlay_heading_two'] = theme_get_setting('portfolio_ten_overlay_heading_two');
+  $variables['portfolio_button_link_url'] = theme_get_setting('portfolio_button_link_url');
+  $variables['portfolio_button_link_title'] = theme_get_setting('portfolio_button_link_title');
+
+  // Contact Settings
+  $variables['contact_heading'] = theme_get_setting('contact_heading');
+  $variables['contact_description'] = theme_get_setting('contact_description');
+  $fid = theme_get_setting("contact_address_icon", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['contact_address_icon'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['contact_address_icon'] = drupal_get_path('theme', 'photogenic') . '/images/location.png';
+  }
+  $variables['contact_address'] = theme_get_setting('contact_address');
+  $fid = theme_get_setting("contact_phone_icon", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['contact_phone_icon'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['contact_phone_icon'] = drupal_get_path('theme', 'photogenic') . '/images/phone1.png';
+  }
+  $variables['contact_phone_number'] = theme_get_setting('contact_phone_number');
+  $variables['contact_button_title'] = theme_get_setting('contact_button_title');
+
+  // Feature Settings
+  $fid = theme_get_setting("tweet_image", "photogenic");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    if ($file && $uri = $file->getFileUri()) {
+      $variables['tweet_image'] = file_create_url($uri);
+    }
+  }
+  else {
+    $variables['tweet_image'] = drupal_get_path('theme', 'photogenic') . '/images/quote.png';
+  }
+  $variables['tweet_message'] = theme_get_setting('tweet_message');
+  $variables['tweet_user'] = theme_get_setting('tweet_user');
+
+  // Social Icons Settings
+  $variables['footer_facebook'] = theme_get_setting('footer_facebook');
+  $variables['footer_twitter'] = theme_get_setting('footer_twitter');
+  $variables['footer_linkedin'] = theme_get_setting('footer_linkedin');
+}

@@ -1,0 +1,18 @@
+global-styling:
+  css:
+    theme:
+      css/bootstrap.css: {}
+      css/colorbox.css: {}
+      css/style.css: {}
+      css/font-awesome-animation.min.css: {}
+      css/font-awesome.min.css: {}
+      http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic: { type: external, minified: true }
+  js:
+    # js/jquery.min.js: {}
+    # js/bootstrap.min.js: {}
+    # js/stickUp.min.js: {}
+    js/colorbox/jquery.colorbox-min.js: {}
+    js/script.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery

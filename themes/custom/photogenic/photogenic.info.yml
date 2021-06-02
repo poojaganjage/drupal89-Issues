@@ -1,0 +1,22 @@
+name: Photogenic
+type: theme
+base theme: bootstrap
+description: A Simple Drupal 8 photogenic theme with multiple regions.
+package: 'Bootstrap'
+core_version_requirement: ^8 || ^9
+
+regions:
+    header: 'Header'
+    main_navigation: 'Main Navigation'      
+    content: 'Content'
+    sidebar_first: 'Sidebar First'
+    sidebar_second: 'Sidebar Second'
+    featured: 'Featured'
+    footer_one: 'Footer One'
+    footer_two: 'Footer Two'
+    footer_three: 'Footer Three'
+
+libraries:
+    - photogenic/global-styling
+    
+    
